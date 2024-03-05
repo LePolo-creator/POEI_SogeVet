@@ -1,0 +1,6 @@
+@SogeVet.Server_HostAddress = http://localhost:5181
+
+GET {{SogeVet.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

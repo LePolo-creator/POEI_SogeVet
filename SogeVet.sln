@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SogeVet.Server", "SogeVet.Server\SogeVet.Server.csproj", "{FA11A63C-E346-4A0B-82B7-E7644A0F3023}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "sogevet.client", "sogevet.client\sogevet.client.esproj", "{8BFF85BE-E2FF-4DFE-AE29-CCCE9DAA0DCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA11A63C-E346-4A0B-82B7-E7644A0F3023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA11A63C-E346-4A0B-82B7-E7644A0F3023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA11A63C-E346-4A0B-82B7-E7644A0F3023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA11A63C-E346-4A0B-82B7-E7644A0F3023}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFF85BE-E2FF-4DFE-AE29-CCCE9DAA0DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BFF85BE-E2FF-4DFE-AE29-CCCE9DAA0DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFF85BE-E2FF-4DFE-AE29-CCCE9DAA0DCF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8BFF85BE-E2FF-4DFE-AE29-CCCE9DAA0DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFF85BE-E2FF-4DFE-AE29-CCCE9DAA0DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFF85BE-E2FF-4DFE-AE29-CCCE9DAA0DCF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6ABC206C-6161-4A36-B506-6ADD694336DF}
+	EndGlobalSection
+EndGlobal

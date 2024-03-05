@@ -2,7 +2,7 @@
 {
     public class Admin : User
     {
-
-        // ici ne mettre que les méthodes admin
+        public int test { get; set; }
+       
     }
-}
+} 

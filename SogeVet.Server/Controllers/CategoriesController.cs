@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging;
 using SogeVet.Server.Data;
 using SogeVet.Server.Entities;
 using SogeVet.Server.Models;
+using SogeVet.Server.Controllers;
 
 namespace SogeVet.Server.Controllers
 {
@@ -32,22 +34,41 @@ namespace SogeVet.Server.Controllers
         [HttpGet]
         public  ActionResult<IEnumerable<CategoryDto>> GetCategories()
         {
-            var categories = _context.Categories;
-            return  Ok(categories);
+            var categories = _context.Categories.Include(c => c.Products);
+            List<CategoryDto> categoriesDto = new List<CategoryDto>() ;
+            foreach (var category in categories) {
+                // Get products in productDto format
+                var productsDto = new List<ProductDto>();
+                foreach (var product in category.Products) {
+                    var productDto = product.ConvertToDto(category.Name);
+                    productsDto.Add(productDto);
+                }
+
+                categoriesDto.Add(new CategoryDto { Id = category.Id, Name = category.Name, Products = productsDto });
+                
+                }
+            return  Ok(categoriesDto);
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
         public  ActionResult<CategoryDto> GetCategory(int id)
         {
-            var category =  _context.Categories.Find(id);
+            var category = _context.Categories.Where(c => c.Id == id).Include(c => c.Products).FirstOrDefault();
 
             if (category == null)
             {
                 return NotFound();
             }
 
-            return Ok(category);
+            var productsDto = new List<ProductDto>();
+            foreach (var product in category.Products)
+            {
+                var productDto = product.ConvertToDto(category.Name);
+                productsDto.Add(productDto);
+            }
+
+            return Ok(new CategoryDto { Id = category.Id, Name = category.Name, Products = productsDto });
         }
 
         // PUT: api/Categories/5
@@ -67,7 +88,7 @@ namespace SogeVet.Server.Controllers
 
             _context.SaveChanges();
 
-            return Ok(categoryToEdit);
+            return GetCategory(id);
         }
 
         // POST: api/Categories

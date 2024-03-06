@@ -6,7 +6,7 @@
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int Size { get; set; }   // string parmi une liste définie
-        public Decimal UnitPrice { get; set; }
+        public float UnitPrice { get; set; }
         public string Color {  get; set; } = "Blanc";   // string parmi une liste définie
         public List<string> Images { get; set; } = new List<string>();
         public int Quantity { get; set; }

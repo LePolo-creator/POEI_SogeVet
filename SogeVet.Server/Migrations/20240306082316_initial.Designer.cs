@@ -11,7 +11,7 @@ using SogeVet.Server.Data;
 namespace SogeVet.Server.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240305155155_initial")]
+    [Migration("20240306082316_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -93,7 +93,7 @@ namespace SogeVet.Server.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Items");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("SogeVet.Server.Entities.Product", b =>
@@ -151,11 +151,6 @@ namespace SogeVet.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -163,6 +158,9 @@ namespace SogeVet.Server.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -175,20 +173,6 @@ namespace SogeVet.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("SogeVet.Server.Entities.Admin", b =>
-                {
-                    b.HasBaseType("SogeVet.Server.Entities.User");
-
-                    b.Property<int>("test")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Admin");
                 });
 
             modelBuilder.Entity("SogeVet.Server.Entities.Order", b =>

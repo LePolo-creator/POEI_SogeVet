@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SogeVet.Server.Data;
 using SogeVet.Server.Entities;
+using SogeVet.Server.Models;
 
 namespace SogeVet.Server.Controllers
 {
@@ -29,79 +30,73 @@ namespace SogeVet.Server.Controllers
 
         // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public  ActionResult<IEnumerable<CategoryDto>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+            var categories = _context.Categories;
+            return  Ok(categories);
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public  ActionResult<CategoryDto> GetCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category =  _context.Categories.Find(id);
 
             if (category == null)
             {
                 return NotFound();
             }
 
-            return category;
+            return Ok(category);
         }
 
         // PUT: api/Categories/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public ActionResult<CategoryDto> PutCategory(int id, CategoryDto categoryDto)
         {
-            if (id != category.Id)
+            if (id != categoryDto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(category).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
+            var categoryToEdit = _context.Categories.Find(id);
+            if (categoryToEdit == null) {
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            categoryToEdit.Name = categoryDto.Name;
 
-            return NoContent();
+            _context.SaveChanges();
+
+            return Ok(categoryToEdit);
         }
 
         // POST: api/Categories
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public ActionResult<CategoryDto> PostCategory(CategoryDto categoryDto)
         {
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
+            var categoryToAdd = new Category { Name = categoryDto.Name  };
+            _context.Categories.Add(categoryToAdd);
+            _context.SaveChanges();
 
-            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+            categoryDto.Id = categoryToAdd.Id;
+
+            return Ok(categoryDto);
         }
 
         // DELETE: api/Categories/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
+        public ActionResult<string> DeleteCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = _context.Categories.Find(id);
             if (category == null)
             {
                 return NotFound();
             }
 
             _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            return NoContent();
+            return Ok("Category was successfully deleted");
         }
 
         private bool CategoryExists(int id)

@@ -10,7 +10,7 @@
         public string Color { get; set; } = "Blanc";
         public List<string> Images { get; set; } = new List<string>();
         public int Quantity { get; set; }
-        public string CategoryName { get; set; }//a faire : ajouter le nom depuis l'id 
+        public string CategoryName { get; set; } //a faire : ajouter le nom depuis l'id 
 
     }
 }

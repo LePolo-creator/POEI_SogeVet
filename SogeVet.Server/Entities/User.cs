@@ -1,4 +1,6 @@
-﻿namespace SogeVet.Server.Entities
+﻿using SogeVet.Server.Models;
+
+namespace SogeVet.Server.Entities
 {
     public class User
     {
@@ -13,6 +15,14 @@
 
 
         public List<Order>? Orders { get; set; }
+
+
+        public UserDto ConvertToDto()
+        {
+            return new UserDto() { Id = this.Id, FirstName = this.FirstName, LastName = this.LastName, Email = this.Email, Password = this.Password };
+        }
+
+   
 
     }
 }

@@ -27,9 +27,10 @@ namespace SogeVet.Server.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public IEnumerable<User> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+
+            return _context.Users.ToList();
         }
 
         // GET: api/Users/5

@@ -1,4 +1,7 @@
-﻿namespace SogeVet.Server.Entities
+﻿using Microsoft.EntityFrameworkCore;
+using SogeVet.Server.Models;
+
+namespace SogeVet.Server.Entities
 {
     public class Product
     {
@@ -13,8 +16,23 @@
         public int CategoryId { get; set; }//ajouter un tableau de product dans la class category
 
 
-
-
+       
+        public ProductDto ConvertToDto( String categoryName)
+        {
+            var productDto = new ProductDto()
+            {
+                Id = this.Id,
+                CategoryName = categoryName,
+                Name = this.Name,
+                Description = this.Description,
+                Color = this.Color,
+                Images = this.Images,
+                Quantity = this.Quantity,
+                Size = this.Size,
+                UnitPrice = this.UnitPrice
+            };
+            return productDto;
+        }
 
     }
 }

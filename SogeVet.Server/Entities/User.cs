@@ -9,6 +9,8 @@
         public required string Password { get; set; }
         public string Address { get; set; } = string.Empty;
 
+        public bool IsAdmin { get; set; } = false;
+
 
         public List<Order>? Orders { get; set; }
 

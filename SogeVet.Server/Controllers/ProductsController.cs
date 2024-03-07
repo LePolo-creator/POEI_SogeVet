@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SogeVet.Server.Data;
 using SogeVet.Server.Entities;
+using SogeVet.Server.Models;
 
 namespace SogeVet.Server.Controllers
 {
@@ -23,84 +24,91 @@ namespace SogeVet.Server.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public ActionResult<IEnumerable<ProductDto>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            var products = _context.Products.Include(p=>p.Category);
+            var productsDto = new List<ProductDto>();
+            foreach (var product in products)
+            {
+                productsDto.Add(product.ConvertToDto(product.Category.Name));
+            }
+            return Ok(productsDto);
+
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public ActionResult<ProductDto> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = _context.Products.Include(p => p.Category).Where(p=>p.Id==id).FirstOrDefault();
 
             if (product == null)
             {
                 return NotFound();
             }
+            var category = product.Category.Name;
 
-            return product;
+            return Ok(product.ConvertToDto(category));
         }
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public ActionResult<ProductDto> PutProduct(int id, ProductDto productDto)
         {
-            if (id != product.Id)
+            if (id != productDto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
-
-            try
+            var productToEdit = _context.Products.Find(id);
+            if (productToEdit == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var category = _context.Categories.Where(c=>c.Name == productDto.CategoryName).FirstOrDefault();
+            productToEdit.CategoryId = category.Id;
+            productToEdit.Name = productDto.Name;
+            productToEdit.Description = productDto.Description;
+            productToEdit.Color = productDto.Color;
+            productToEdit.Images = productDto.Images;
+            productToEdit.Quantity = productDto.Quantity;
+            productToEdit.Size = productDto.Size;
+            productToEdit.UnitPrice = productDto.UnitPrice;
 
-            return NoContent();
+            _context.SaveChanges();
+
+
+            return GetProduct(id);
+
         }
 
         // POST: api/Products
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public ActionResult<Product> PostProduct(ProductDto productDto)
         {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            int categoryID = _context.Categories.Where(c=>c.Name == productDto.CategoryName).FirstOrDefault().Id;
+            var newProduct = productDto.ConvertToProduct(categoryID);
+            _context.Products.Add(newProduct);
+            _context.SaveChanges();
+            productDto.Id = newProduct.Id;
+            return Ok(productDto);
         }
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public ActionResult<string> DeleteProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = _context.Products.Find(id);
             if (product == null)
             {
                 return NotFound();
             }
 
             _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            return NoContent();
+            return Ok("Category was successfully deleted");
         }
 
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.Id == id);
-        }
     }
 }

@@ -13,10 +13,11 @@ namespace SogeVet.Server.Entities
         public string Color {  get; set; } = "Blanc";   // string parmi une liste définie
         public List<string> Images { get; set; } = new List<string>();
         public int Quantity { get; set; }
+        public Category Category { get; set; }
         public int CategoryId { get; set; }//ajouter un tableau de product dans la class category
 
-
-       
+        
+               
         public ProductDto ConvertToDto( String categoryName)
         {
             var productDto = new ProductDto()

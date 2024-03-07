@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SogeVet.Server.Data;
 
@@ -10,9 +11,11 @@ using SogeVet.Server.Data;
 namespace SogeVet.Server.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240307100037_ajout1ordertest")]
+    partial class ajout1ordertest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,34 +90,6 @@ namespace SogeVet.Server.Migrations
                             Address = "Adress 1",
                             Status = "En attente de traitement",
                             UserId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Adress 2",
-                            Status = "En attente de traitement",
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "Adress 3",
-                            Status = "En attente de traitement",
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "Adress 4",
-                            Status = "En attente de traitement",
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "Adress 5",
-                            Status = "En attente de traitement",
-                            UserId = 3
                         });
                 });
 
@@ -145,72 +120,6 @@ namespace SogeVet.Server.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderId = 1,
-                            ProductId = 7,
-                            Quantity = 2,
-                            UnitPrice = 20
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderId = 2,
-                            ProductId = 4,
-                            Quantity = 3,
-                            UnitPrice = 25
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OrderId = 3,
-                            ProductId = 3,
-                            Quantity = 4,
-                            UnitPrice = 26
-                        },
-                        new
-                        {
-                            Id = 4,
-                            OrderId = 1,
-                            ProductId = 2,
-                            Quantity = 10,
-                            UnitPrice = 5
-                        },
-                        new
-                        {
-                            Id = 5,
-                            OrderId = 2,
-                            ProductId = 1,
-                            Quantity = 1,
-                            UnitPrice = 80
-                        },
-                        new
-                        {
-                            Id = 6,
-                            OrderId = 1,
-                            ProductId = 10,
-                            Quantity = 2,
-                            UnitPrice = 5
-                        },
-                        new
-                        {
-                            Id = 7,
-                            OrderId = 4,
-                            ProductId = 11,
-                            Quantity = 3,
-                            UnitPrice = 40
-                        },
-                        new
-                        {
-                            Id = 8,
-                            OrderId = 5,
-                            ProductId = 12,
-                            Quantity = 2,
-                            UnitPrice = 15
-                        });
                 });
 
             modelBuilder.Entity("SogeVet.Server.Entities.Product", b =>

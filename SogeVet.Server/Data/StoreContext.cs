@@ -55,7 +55,27 @@ namespace SogeVet.Server.Data
                 new Product{ Id = 12,Name = "Produit 12" ,Description = "Description du produit 12" , Size = 30 ,UnitPrice = 3.22f , Color = "Noir", Images = new List<string>{"URL12.1","URL12.2","URL12.3"},Quantity = 5, CategoryId = 2},
             };
             modelBuilder.Entity<Product>().HasData(products);
-
+            var orders = new Order[]
+            {
+                new Order{ Id = 1,Address = "Adress 1",Status = "En attente de traitement",UserId = 3},
+                new Order{ Id = 2,Address = "Adress 2",Status = "En attente de traitement",UserId = 4},
+                new Order{ Id = 3,Address = "Adress 3",Status = "En attente de traitement",UserId = 5},
+                new Order{ Id = 4,Address = "Adress 4",Status = "En attente de traitement",UserId = 3},
+                new Order{ Id = 5,Address = "Adress 5",Status = "En attente de traitement",UserId = 3}
+            };
+            modelBuilder.Entity<Order>().HasData(orders);
+            var orderitems = new OrderItem[]
+            {
+                new OrderItem{ Id = 1,Quantity = 2,UnitPrice = 20,OrderId = 1,ProductId = 7},
+                new OrderItem{ Id = 2,Quantity = 3,UnitPrice = 25,OrderId = 2,ProductId = 4},
+                new OrderItem{ Id = 3,Quantity = 4,UnitPrice = 26,OrderId = 3,ProductId = 3},
+                new OrderItem{ Id = 4,Quantity = 10,UnitPrice = 5,OrderId = 1,ProductId = 2},
+                new OrderItem{ Id = 5,Quantity = 1,UnitPrice = 80,OrderId = 2,ProductId = 1},
+                new OrderItem{ Id = 6,Quantity = 2,UnitPrice = 5,OrderId = 1,ProductId = 10},
+                new OrderItem{ Id = 7,Quantity = 3,UnitPrice = 40,OrderId = 4,ProductId = 11},
+                new OrderItem{ Id = 8,Quantity = 2,UnitPrice = 15,OrderId = 5,ProductId = 12}
+            };
+            modelBuilder.Entity<OrderItem>().HasData(orderitems);
 
 
 

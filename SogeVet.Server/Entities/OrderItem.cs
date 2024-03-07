@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using SogeVet.Server.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SogeVet.Server.Entities
 {
@@ -14,5 +15,11 @@ namespace SogeVet.Server.Entities
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
+
+
+
+        public OrderItemDto ConvertToDto() {  
+            return new OrderItemDto { Id = this.Id, Quantity = this.Quantity, UnitPrice = this.UnitPrice, OrderId = this.OrderId, ProductId = this.ProductId }; 
+        }
     }
 }

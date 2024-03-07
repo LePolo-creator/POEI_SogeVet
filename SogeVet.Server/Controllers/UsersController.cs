@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using SogeVet.Server.Data;
 using SogeVet.Server.Entities;
+using SogeVet.Server.Models;
 
 namespace SogeVet.Server.Controllers
 {
@@ -35,73 +37,63 @@ namespace SogeVet.Server.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public ActionResult<UserDto> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-
+            var user =  _context.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
+            var userDto = user.ConvertToDto();
 
-            return user;
+            return userDto;
         }
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public ActionResult<UserDto> PutUser(int id, UserDto userDto)
         {
-            if (id != user.Id)
+            if (id != userDto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            var userToEdit = _context.Users.FirstOrDefault(u => u.Id == id);
+            userToEdit.FirstName = userDto.FirstName;
+            userToEdit.LastName = userDto.LastName;
+            userToEdit.Email = userDto.Email;
+            userToEdit.Password = userDto.Password;
+            _context.SaveChanges();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return GetUser(id) ;
         }
 
         // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public ActionResult<UserDto> PostUser(UserDto userDto)
         {
+            var user = userDto.ConvertToUser();
             _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);  
+            return Ok(userDto);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public ActionResult DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user =  _context.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
 
             _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return NoContent();
-        }
+        } 
 
         private bool UserExists(int id)
         {

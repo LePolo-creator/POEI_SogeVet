@@ -7,7 +7,7 @@ namespace SogeVet.Server.Entities
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public int UnitPrice { get; set; }
+        public float UnitPrice { get; set; }
 
 
         // foreign keys 

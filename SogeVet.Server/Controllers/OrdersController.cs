@@ -26,7 +26,7 @@ namespace SogeVet.Server.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<OrderDto>> GetOrders()
         {
-            var orders = _context.Orders;
+            var orders = _context.Orders.Include(o => o.OrderItems);
             var ordersDto = new List<OrderDto>();
             foreach (var order in orders) {ordersDto.Add(order.ConvertToDto());}
             return ordersDto;
@@ -36,7 +36,7 @@ namespace SogeVet.Server.Controllers
         [HttpGet("{id}")]
         public ActionResult<OrderDto> GetOrder(int id)
         {
-            var order =  _context.Orders.Find(id);
+            var order =  _context.Orders.Where(o => o.Id == id).Include(o => o.OrderItems).FirstOrDefault(); 
 
             if (order == null)
             {
@@ -70,9 +70,11 @@ namespace SogeVet.Server.Controllers
         public ActionResult<OrderDto> PostOrder(OrderDto orderDto)
         {
             var order = orderDto.ConvertToOrder();
+            order.Status = "En cours de traitement";
             _context.Orders.Add(order);
             _context.SaveChanges();
             orderDto.Id = order.Id;
+            orderDto.Status = order.Status;
 
             return orderDto;
         }

@@ -1,6 +1,14 @@
 using SogeVet.Server.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(
+    options =>
+   {
+       options.AddPolicy(name: "AdminClient", policy => {
+           policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+       });
+   }
+) ;
 
 // Add services to the container.
 
@@ -23,7 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AdminClient");
 app.UseAuthorization();
 
 app.MapControllers();

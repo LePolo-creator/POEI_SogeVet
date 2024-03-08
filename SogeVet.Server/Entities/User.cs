@@ -19,7 +19,7 @@ namespace SogeVet.Server.Entities
 
         public UserDto ConvertToDto()
         {
-            return new UserDto() { Id = this.Id, FirstName = this.FirstName, LastName = this.LastName, Email = this.Email, Password = this.Password };
+            return new UserDto() { Id = this.Id, FirstName = this.FirstName, LastName = this.LastName, Email = this.Email, Password = this.Password,Address = this.Address,IsAdmin = this.IsAdmin };
         }
 
    

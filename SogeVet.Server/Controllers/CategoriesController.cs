@@ -106,7 +106,7 @@ namespace SogeVet.Server.Controllers
 
         // DELETE: api/Categories/5
         [HttpDelete("{id}")]
-        public ActionResult<string> DeleteCategory(int id)
+        public ActionResult DeleteCategory(int id)
         {
             var category = _context.Categories.Find(id);
             if (category == null)
@@ -117,7 +117,7 @@ namespace SogeVet.Server.Controllers
             _context.Categories.Remove(category);
             _context.SaveChanges();
 
-            return Ok("Category was successfully deleted");
+            return Ok();
         }
 
         private bool CategoryExists(int id)

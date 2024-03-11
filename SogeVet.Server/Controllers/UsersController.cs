@@ -32,14 +32,14 @@ namespace SogeVet.Server.Controllers
         public IEnumerable<User> GetUsers()
         {
 
-            return _context.Users.ToList();
+            return _context.Users.Include(u => u.Orders).ThenInclude(o => o.OrderItems);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public ActionResult<UserDto> GetUser(int id)
         {
-            var user =  _context.Users.Find(id);
+            var user = _context.Users.Include(u => u.Orders).ThenInclude(o => o.OrderItems).FirstOrDefault(u => u.Id == id);
             if (user == null)
             {
                 return NotFound();

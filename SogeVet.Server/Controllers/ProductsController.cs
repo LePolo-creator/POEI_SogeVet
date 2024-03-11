@@ -107,7 +107,7 @@ namespace SogeVet.Server.Controllers
             _context.Products.Remove(product);
             _context.SaveChanges();
 
-            return Ok("Category was successfully deleted");
+            return Ok();
         }
 
     }

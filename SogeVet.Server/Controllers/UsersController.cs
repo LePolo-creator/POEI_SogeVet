@@ -14,7 +14,7 @@ using SogeVet.Server.Models;
 namespace SogeVet.Server.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(role ="")]
+    [Authorize]
     [ApiController]
     public class UsersController : ControllerBase
     {

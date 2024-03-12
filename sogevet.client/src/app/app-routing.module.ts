@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' } // Redirection vers la page d'accueil si l'URL ne correspond à aucune route
+  { path: '**', redirectTo: '', pathMatch: 'full' } 
 ];
 
 @NgModule({

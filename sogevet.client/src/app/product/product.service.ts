@@ -7,12 +7,12 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'https://localhost:7265/api/product'; 
+  private apiUrl = 'https://localhost:7265/api/products/'; 
   constructor(private http: HttpClient) { }
 
   
   getProducts(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/products`).pipe(
+    return this.http.get<any>(`${this.apiUrl}`).pipe(
       catchError(error => {
         console.log('Error fetching products:', error);
         throw error;
@@ -21,7 +21,7 @@ export class ProductService {
   }
 
   getProductById(productId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/products/${productId}`).pipe(
+    return this.http.get<any>(`${this.apiUrl}${productId}`).pipe(
       catchError(error => {
         console.log(`Error fetching product with ID ${productId}:`, error);
         throw error;

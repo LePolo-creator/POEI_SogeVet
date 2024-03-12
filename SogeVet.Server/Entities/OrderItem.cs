@@ -18,8 +18,9 @@ namespace SogeVet.Server.Entities
 
 
 
-        public OrderItemDto ConvertToDto() {  
-            return new OrderItemDto { Id = this.Id, Quantity = this.Quantity, UnitPrice = this.UnitPrice, OrderId = this.OrderId, ProductId = this.ProductId }; 
+        public OrderItemDto ConvertToDto() {
+            return new OrderItemDto { Id = this.Id, Quantity = this.Quantity, UnitPrice = this.UnitPrice, TotalPrice = this.Quantity * this.UnitPrice,
+                OrderId = this.OrderId, ProductId = this.ProductId }; 
         }
     }
 }

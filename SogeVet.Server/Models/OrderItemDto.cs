@@ -11,10 +11,13 @@ namespace SogeVet.Server.Models
         public int OrderId { get; set; }   
 
         // Transformer le productId plutôt en "nom du produit" ? ou  garder le ProductId et faire des find pour récupérer son nom et son image par ex?
-        public int ProductId { get; set; }  
-        
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public float TotalPrice { get; set; }
+
         public OrderItem ConvertToOrderItem() { 
-            return new OrderItem { Quantity = this.Quantity, UnitPrice = this.UnitPrice, OrderId = this.OrderId, ProductId = this.ProductId }; // Id généré par la DB
+            return new OrderItem { Quantity = this.Quantity, UnitPrice = this.UnitPrice, OrderId = this.OrderId, 
+                ProductId = this.ProductId }; // Id généré par la DB
         }
     }
 }

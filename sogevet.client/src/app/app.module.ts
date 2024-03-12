@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { CartComponent } from './cart/cart.component';
 import { AdminComponent } from './admin/admin.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -18,7 +19,7 @@ import { AdminComponent } from './admin/admin.component';
     AdminComponent,
   ],
   imports: [
-    BrowserModule, HttpClientModule
+    BrowserModule, HttpClientModule, AppRoutingModule
     
   ],
   providers: [],

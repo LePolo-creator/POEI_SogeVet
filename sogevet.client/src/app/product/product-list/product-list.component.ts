@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../model/product';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -9,20 +10,20 @@ import { Product } from '../model/product';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  productToDisplay: Product[] = [];
+  productSubscription?: Subscription;
   constructor(private productService: ProductService) { }
 
-  ngOnInit(): void {
-    this.loadProducts();
-  }
 
-  loadProducts(): void {
-    this.productService.getProducts().subscribe(
-      response => {
-        this.products = response;
-        console.log(this.products)
-      },
-      error => {
-        console.log('Error loading products:', error);
+
+  ngOnInit(): void {
+    this.productService.getProducts();
+
+    this.productSubscription = this.productService.productsUpdated.subscribe(
+      p => {
+        this.products = p
+        this.productToDisplay = p;
+
       }
     );
   }

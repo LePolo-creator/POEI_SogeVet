@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -52,12 +53,19 @@ namespace BookAPI.Controllers
                 Convert.FromBase64String(_configuration["Authentication:SecretForKey"]));
             var signingCredentials = new SigningCredentials(
                 securityKey, SecurityAlgorithms.HmacSha256);
+            var role = "user";
+            if (user.IsAdmin)
+            {
+                role = "admin";
+            }
+            
+
 
             var claimsForToken = new List<Claim>();
             claimsForToken.Add(new Claim("sub", user.Id.ToString()));
             claimsForToken.Add(new Claim("firstname", user.FirstName));
             claimsForToken.Add(new Claim("lastname", user.LastName));
-            claimsForToken.Add(new Claim("role", "admin"));
+            claimsForToken.Add(new Claim("role", role));
 
             var jwtSecurityToken = new JwtSecurityToken(
                 _configuration["Authentication:Issuer"],

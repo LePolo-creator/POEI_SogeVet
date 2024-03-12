@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
-import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
 import { AdminComponent } from './admin/admin.component';
 
@@ -15,7 +14,6 @@ import { AdminComponent } from './admin/admin.component';
   declarations: [
     AppComponent,
     IndexComponent,
-    ProductsComponent,
     CartComponent,
     AdminComponent,
   ],

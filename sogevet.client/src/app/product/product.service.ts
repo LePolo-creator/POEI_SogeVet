@@ -12,7 +12,10 @@ export class ProductService {
 
   
   getProducts(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`).pipe(
+
+
+    return this.http.get<any>(this.apiUrl).pipe(
+
       catchError(error => {
         console.log('Error fetching products:', error);
         throw error;
@@ -21,7 +24,10 @@ export class ProductService {
   }
 
   getProductById(productId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}${productId}`).pipe(
+
+
+    return this.http.get<any>(this.apiUrl+productId).pipe(
+
       catchError(error => {
         console.log(`Error fetching product with ID ${productId}:`, error);
         throw error;

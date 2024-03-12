@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  productToDisplay: Product[] = [];
+  productsToDisplay: Product[] = [];
   productSubscription?: Subscription;
   constructor(private productService: ProductService) { }
 
@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit {
     this.productSubscription = this.productService.productsUpdated.subscribe(
       p => {
         this.products = p
-        this.productToDisplay = p;
+        this.productsToDisplay = p;
 
       }
     );

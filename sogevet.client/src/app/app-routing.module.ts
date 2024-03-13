@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { IndexComponent } from './index/index.component';
+import { CartComponent } from './cart/cart.component';
+
 
 
 const routes: Routes = [
@@ -18,8 +21,11 @@ const routes: Routes = [
   },
   {
     path: "products/filter/:categoryName", component: IndexComponent
-  }
 
+  }, {
+    path: "cart", component: CartComponent
+
+  }
 
 ];
 

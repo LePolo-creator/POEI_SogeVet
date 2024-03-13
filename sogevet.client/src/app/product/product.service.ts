@@ -29,15 +29,21 @@ export class ProductService {
     return this.http.get<Product>(this.apiUrl + id);
   }
 
+  getLocalProductById(id: number)  {
+    return this.products.find(p => p.id === id)
+  }
+
   getStockLevel(id: number) : string {
     let product = this.products.find(p => p.id === id)
     let response = "";
-    if (product!.quantity > 20) {
-      response = "High"
-    } else if (product!.quantity > 0) {
-      response = "Low"
-    } else {
-      response = "None"
+    if (product) {
+      if (product!.quantity > 20) {
+        response = "High"
+      } else if (product!.quantity > 0) {
+        response = "Low"
+      } else {
+        response = "None"
+      }
     }
     return response
   }

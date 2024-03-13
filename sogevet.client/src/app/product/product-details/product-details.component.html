@@ -8,8 +8,8 @@
       <div class="product-wrap shadow mb-5 rounded">
         <div class="product-img">
           <div *ngFor="let image of product!.images; let i = index">
-            <img *ngIf="i === 0" class="default-img" src="assets/img/product/pro-4.webp" alt="">
-            <img *ngIf="i !== 0" class="hover-img" src="assets/img/product/pro-2.webp" alt="">
+            <img *ngIf="i === 0" class="default-img" src={{image}} alt="">
+            <img *ngIf="i !== 0" class="hover-img" src={{image}} alt="">
           </div>
         </div>
       </div>

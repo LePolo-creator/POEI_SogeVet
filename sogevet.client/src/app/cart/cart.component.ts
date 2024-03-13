@@ -12,28 +12,16 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[] = []
   cart?: Cart
 
-/*  calculateTotal() {
-    let total = 0;
-    this.cartItems!.forEach(item => {
-      total += item.totalPrice
-    })
-    return total
-  }*/
-
   constructor(private cartService: CartService) { }
+
+
   ngOnInit() {
-    // a supprimer
-    this.cartService.testCart()
-    this.cartItems = this.cartService.getCartItems()
+/*    this.cartService.testCart() // fake seeds
+*/    this.cartService.cartUpdated.subscribe(cart => { console.log(cart), this.cart = cart, this.cartItems = this.cart.cartItems })
 
 
-/*    this.cartService.cartItemsUpdated.subscribe(items => {
-      this.cartItems = items
-      console.log(this.cartItems)
-      const total = this.calculateTotal()
-    })*/
-
-    this.cartService.cartUpdated.subscribe(cart => { this.cart = cart, this.cartItems = this.cart.cartItems })
+   // this.cartItems = this.cartService.getCartItems()
+   //   this.cartService.cartItemsUpdated.subscribe(items => { this.cartItems = items })
   }
 
 }

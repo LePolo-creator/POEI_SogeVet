@@ -22,9 +22,14 @@ const routes: Routes = [
   {
     path: "products/filter/:categoryName", component: IndexComponent
 
-  }, {
+  },
+  {
     path: "cart", component: CartComponent
 
+  },
+  {
+    path: "login",
+    loadChildren: () => import("./login/login.module").then(m => m.LoginModule)
   }
 
 ];

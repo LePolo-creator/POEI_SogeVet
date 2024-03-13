@@ -1,12 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
 
 @Component({
   selector: 'app-root',
@@ -15,7 +10,16 @@ interface WeatherForecast {
 })
 export class AppComponent {
 
-  constructor(private http: HttpClient) {}
+  
+  public showMenuFooter = true;
+  constructor(private http: HttpClient, router: Router) {
+    router.events.forEach((event) => {
+      if (event instanceof NavigationStart) {
+        /*this.showMenuFooter = event.url !== "/login";*/
+        this.showMenuFooter != event.url.startsWith("/login");
+      }
+    });
+  }
 
 
 

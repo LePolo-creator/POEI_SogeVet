@@ -8,6 +8,8 @@ import { CartComponent } from './cart/cart.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { MenuComponent } from './menu/menu.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -18,6 +20,8 @@ import { FormsModule } from '@angular/forms';
     IndexComponent,
     CartComponent,
     AdminComponent,
+    MenuComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule,FormsModule

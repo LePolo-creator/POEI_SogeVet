@@ -7,6 +7,7 @@ import { IndexComponent } from './index/index.component';
 import { CartComponent } from './cart/cart.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
     AdminComponent,
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule
+    BrowserModule, HttpClientModule, AppRoutingModule,FormsModule
     
   ],
   providers: [],

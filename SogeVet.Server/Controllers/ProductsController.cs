@@ -51,6 +51,26 @@ namespace SogeVet.Server.Controllers
             return Ok(product.ConvertToDto(category));
         }
 
+        [HttpGet("filter/{filter}")]
+        public ActionResult<IEnumerable<ProductDto>> GetProductsFilter(string filter)
+        {
+            var category = _context.Categories.Where(c=>c.Name == filter).FirstOrDefault();
+            var products = _context.Products.Include(p => p.Category).Where(p=>p.CategoryId==category.Id);
+
+            if (products == null)
+            {
+                return NotFound();
+            }
+            var productsDTO = new List<ProductDto>();
+            foreach (var product in products)
+            {
+                productsDTO.Add(product.ConvertToDto(category.Name));
+            }
+
+            return Ok(productsDTO);
+        }
+
+
         // PUT: api/Products/5
         [HttpPut("{id}")]
         public ActionResult<ProductDto> PutProduct(int id, ProductDto productDto)

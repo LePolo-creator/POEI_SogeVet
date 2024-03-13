@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: "", component: ProductListComponent, pathMatch: "full" },
   { path: ":id", component: ProductDetailsComponent }
 
+  { path: "filter/:categoryName", component: ProductListComponent, pathMatch: "full" }
+
 ];
 
 @NgModule({

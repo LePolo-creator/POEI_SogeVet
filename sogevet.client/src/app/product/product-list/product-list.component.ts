@@ -38,7 +38,7 @@ export class ProductListComponent implements OnInit {
               break;
             case "women":
               this.categoryName = "Women"
-              this.filter = "Femme"
+              this.filter = "femme"
               break;
             case "child":
               this.categoryName = "Child"

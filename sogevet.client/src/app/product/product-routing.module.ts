@@ -6,7 +6,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 
 const routes: Routes = [
   { path: "", component: ProductListComponent, pathMatch: "full" },
-  { path: ":id", component: ProductDetailsComponent }
+  { path: ":id", component: ProductDetailsComponent },
 
   { path: "filter/:categoryName", component: ProductListComponent, pathMatch: "full" }
 

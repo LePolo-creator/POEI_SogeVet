@@ -21,6 +21,14 @@ export class ProductService {
     })
   }
 
+  getProductsFilter(filter : string) {
+    this.http.get<Product[]>(this.apiUrl+"filter/"+filter).subscribe(products => {
+      this.products = products
+      this.productsUpdated.next([...this.products])
+    })
+  }
+
+
   getProductById(productId: number): Observable<any> {
 
 

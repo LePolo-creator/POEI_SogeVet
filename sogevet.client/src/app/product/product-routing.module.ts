@@ -6,6 +6,8 @@ import { ProductListComponent } from './product-list/product-list.component';
 const routes: Routes = [
   { path: "", component: ProductListComponent, pathMatch: "full" },
 
+  { path: "filter/:categoryName", component: ProductListComponent, pathMatch: "full" }
+
 ];
 
 @NgModule({

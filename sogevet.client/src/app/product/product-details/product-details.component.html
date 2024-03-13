@@ -1,1 +1,59 @@
-<p>product-details works!</p>
+<div class="container product-details" *ngIf="product">
+
+  <button class="btn btn-primary mb-5" [routerLink]="['/products']"> Retour </button>
+
+  <div class="row justify-content-center">
+
+    <div class="col-4">
+      <div class="product-wrap shadow mb-5 rounded">
+        <div class="product-img">
+          <div *ngFor="let image of product!.images; let i = index">
+            <img *ngIf="i === 0" class="default-img" src="assets/img/product/pro-4.webp" alt="">
+            <img *ngIf="i !== 0" class="hover-img" src="assets/img/product/pro-2.webp" alt="">
+          </div>
+        </div>
+      </div>
+      </div>
+  
+    <div class="col-4">
+      <div class="product-description shadow mb-5 bg-white rounded">
+        <div>
+          <h4 class="fw-bolder mb-3"> {{ product!.name }}</h4>
+          <h6 class="fw-bolder text-secondary">{{product!.unitPrice}} €</h6>
+        </div>
+        <div>
+          <p>{{ product!.description }}</p>
+          <p> <strong> Taille : </strong>{{ product!.size }}</p>
+          <p> <strong> Couleur : </strong>{{ product!.color }}</p>
+        </div>
+
+
+        <div *ngIf="stockLevel! === 'High'" class="flash flash-success alert alert-dismissible fade show">
+          <span><strong>Disponible !</strong> 🎉 C'est le moment de commander </span>
+        </div>
+
+        <div  *ngIf="stockLevel! === 'Low'" class="flash flash-warning alert alert-dismissible fade show" >
+          <span><strong>Vite !</strong> 🤔 Ce produit est bientôt en rupture de stock</span>
+        </div>
+
+        <div *ngIf="stockLevel! === 'None'" class="flash flash-danger alert alert-dismissible fade show">
+          <span><strong>Trop tard !</strong> En rupture de stock</span>
+        </div>
+
+
+        
+          <form class="row g-3 align-items-center justify-content-center"  *ngIf="stockLevel !== 'None'">
+            <div class="col-auto">
+              <label> Choisir quantité</label>
+            </div>
+            <div class="col-auto">
+              <input type="number" name="quantity" required  value=1 min=1 max={{product!.quantity}} #quantity />
+            </div>
+            <button type="submit" class="col-8 btn btn-primary" (click)="addToCart(product.id, +quantity.value)"> Ajouter au panier </button>
+           </form>
+        
+      </div>
+     </div>
+  
+  </div>
+</div>

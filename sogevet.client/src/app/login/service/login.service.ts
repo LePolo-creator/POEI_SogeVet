@@ -92,13 +92,15 @@ export class LoginService {
 
   }
 
+  logout() {
+    localStorage.removeItem("authSogevet");
+    this.router.navigate(["/"]);
+  }
 
   isAuthenticated(): boolean {
     if (localStorage.getItem("authSogevet") == null) {
-      console.log("dans null")
       return false;
     }
-    console.log("hors null")
     var tokenAuth = JSON.parse(localStorage.getItem("authSogevet")!).token
     if (tokenAuth == undefined
     )

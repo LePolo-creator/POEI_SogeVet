@@ -5,11 +5,38 @@
     
     <div class="tab-content" id="">
       <div class="tab-content jump" id="mens">
+
         <div class="section-title-5 text-center">
           <h2>{{categoryName?categoryName:''}}</h2>
         </div>
 
-        
+            <form class="my-5">
+              <h4>Filtres</h4>
+              <div class="d-flex justify-content-center gap-3 mb-3 align-items-end p-3">
+
+                <div>
+                  <label for="keyword">Mot clé</label>
+                  <input type="text" class="form-control" id="keyword" name="keyword" #keyword placeholder="Mot clé" />
+                </div>
+
+<!--                <div>
+                  <label for="color">Couleur</label>
+                  <input type="checkbox" id="color" name="color" value="bleu" />
+                </div>-->
+
+                <div>
+                  <label for=""> Fourchette de prix</label>
+                  <div class="d-flex gap-1">
+                    <input type="number" class="form-control" #min placeholder="Min" />
+                    <input type="number" class="form-control" #max placeholder="Max" />
+                  </div>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-primary" (click)="filterProducts(keyword.value,+min.value, +max.value)">Rechercher </button>
+                </div>
+              </div>
+
+            </form>
 
 
 

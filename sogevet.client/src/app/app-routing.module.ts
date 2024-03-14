@@ -37,6 +37,7 @@ const routes: Routes = [
     loadChildren: () => import("./user/user.module").then(m => m.UserModule), canActivate: [authGuard]
   }
 
+
 ];
 
 @NgModule({

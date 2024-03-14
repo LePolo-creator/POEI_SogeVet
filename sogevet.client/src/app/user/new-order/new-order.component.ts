@@ -18,7 +18,7 @@ export class NewOrderComponent implements OnInit {
   constructor(private orderService: OrderService, private cartService: CartService,
     private userService: UserService, private router : Router
   ) { }
-
+  
   newOrder() {
     this.orderService.newOrder(this.cart!)
     this.router.navigate(["/account"])

@@ -10,6 +10,7 @@ using SogeVet.Server.Data;
 using SogeVet.Server.Entities;
 using SogeVet.Server.Models;
 using SogeVet.Server.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SogeVet.Server.Controllers
 {
@@ -72,6 +73,8 @@ namespace SogeVet.Server.Controllers
         }
 
         // PUT: api/Categories/5
+        [Authorize]
+
         [HttpPut("{id}")]
         public ActionResult<CategoryDto> PutCategory(int id, CategoryDto categoryDto)
         {
@@ -92,6 +95,8 @@ namespace SogeVet.Server.Controllers
         }
 
         // POST: api/Categories
+        [Authorize]
+
         [HttpPost]
         public ActionResult<CategoryDto> PostCategory(CategoryDto categoryDto)
         {
@@ -105,6 +110,8 @@ namespace SogeVet.Server.Controllers
         }
 
         // DELETE: api/Categories/5
+        [Authorize]
+
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(int id)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace SogeVet.Server.Controllers
         }
 
         // GET: api/Orders
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<OrderDto>> GetOrders()
         {
@@ -33,6 +35,7 @@ namespace SogeVet.Server.Controllers
         }
 
         // GET: api/Orders/5
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<OrderDto> GetOrder(int id)
         {
@@ -48,6 +51,7 @@ namespace SogeVet.Server.Controllers
         }
 
         // PUT: api/Orders/5
+        [Authorize]
         [HttpPut("{id}")]
         public ActionResult<OrderDto> PutOrder(int id, OrderDto orderDto)
         {
@@ -66,6 +70,7 @@ namespace SogeVet.Server.Controllers
         }
 
         // POST: api/Orders
+        [Authorize]
         [HttpPost]
         public ActionResult<OrderDto> PostOrder(OrderDto orderDto)
         {
@@ -80,6 +85,7 @@ namespace SogeVet.Server.Controllers
         }
 
         // DELETE: api/Orders/5
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteOrder(int id)
         {

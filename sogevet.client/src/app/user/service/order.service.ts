@@ -17,7 +17,12 @@ export class OrderService {
   baseUrl = "https://localhost:7265/api/";
 
   options = {
-    headers: new HttpHeaders({ "content-type": "application/json" })
+    headers: new HttpHeaders(
+      {
+        "content-type": "application/json",
+        "authorization": "Bearer " + JSON.parse(localStorage.getItem("authSogevet")!).token || ""
+      }
+    )
   }
   constructor(private http : HttpClient, private userService : UserService) { }
 

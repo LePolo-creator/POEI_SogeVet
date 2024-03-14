@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 export class OrderService {
   // IL FAUT UserId
   ordersUpdated = Subject<Order>
+  cart? : Cart
 
   baseUrl = "https://localhost:7265/api/";
 
@@ -24,7 +25,8 @@ export class OrderService {
       }
     )
   }
-  constructor(private http : HttpClient, private userService : UserService) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
+
 
   newOrder(cart: Cart) {
     const cartItems = cart.cartItems

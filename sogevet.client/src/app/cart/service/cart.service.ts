@@ -18,11 +18,7 @@ export class CartService implements OnInit  {
   cartUpdated = new Subject<Cart>
 
 
-  constructor(private productService: ProductService, private orderService : OrderService){ }
-
-  submitOrder() {
-    this.orderService.newOrder(this.getCart())
-  }
+  constructor(private productService: ProductService){ }
 
  
   changeQuantity(productId: number, newQty: number) {
@@ -121,7 +117,6 @@ export class CartService implements OnInit  {
 
   ngOnInit() {
     this.cart = new Cart(this.getItemsFromStorage(), this.calculateTotal())
-    console.log(this.cart)
   }
 
 

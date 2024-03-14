@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CartItem } from './model/cart-item';
 import { Cart } from './model/cart';
 import { CartService } from './service/cart.service';
+import { OrderService } from '../user/service/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -10,12 +12,16 @@ import { CartService } from './service/cart.service';
 })
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = []
-  cart?: Cart 
-  constructor(private cartService: CartService) { }
+  cart?: Cart
+  constructor(private cartService: CartService, private orderService: OrderService, private router : Router) { }
 
-  submitOrder() {
+/*  submitOrder() {
     this.cartService.submitOrder();
     // router
+  }*/
+
+  goToOrder() {
+    this.router.navigate(["/account/neworder"])
   }
 
   changeQtyInCart(productId: number, newQty: number) {

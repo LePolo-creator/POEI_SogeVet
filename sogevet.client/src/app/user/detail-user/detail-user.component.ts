@@ -10,12 +10,12 @@ import { Subscription } from 'rxjs';
 })
 export class ListProfileComponent implements OnInit {
   constructor(private profileService: ProfileService) { }
-  user!: Profile
+  user!: user
   profilSubscription!: Subscription;
   userId: number = 0
 
   ngOnInit(): void {
-    //this.getUserDetails();
+    this.getUserDetails();
     this.userId = 3;
     //this.userId = Number(localStorage.getItem('userId').userId);
 

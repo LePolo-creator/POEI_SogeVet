@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./user-account.component.css']
 })
 export class UserAccountComponent implements OnInit{
-  user?: User ;
+  user!: User ;
   userSubscription?: Subscription;
 
 
@@ -20,10 +20,10 @@ export class UserAccountComponent implements OnInit{
   
 
     ngOnInit(): void {
-      const id = 3;
+      //console.log(JSON.parse(localStorage.getItem("authSogevet")!).userId)
 
-      this.userService.getUserbyId(id).subscribe(u => {
-        this.user = u;
+      this.userService.getUserbyId(JSON.parse(localStorage.getItem("authSogevet")!).idUser).subscribe(u => {
+        this!.user = u;
         console.log(this.user);
       });
       

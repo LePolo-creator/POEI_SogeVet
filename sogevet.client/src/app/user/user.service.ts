@@ -7,29 +7,41 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService{
   private apiUrl = 'https://localhost:7265/api/users/';
   user?: User;
   orders: Order[] = [];
   ordersUpdated = new Subject<Order[]>()
-  options = {
-    headers: new HttpHeaders(
-      {
-        "content-type": "application/json",
-        "authorization": "Bearer " + JSON.parse(localStorage.getItem("authSogevet")!).token || ""
-      }
-    )
-  }
+  
 
 
   constructor(private http: HttpClient) { }
+    
 
   getUserbyId(id: number): Observable<User> {
-    return this.http.get<User>(this.apiUrl + id, this.options);
+    /*console.log(this.options)*/
+    const options = {
+      headers: new HttpHeaders(
+        {
+          "content-type": "application/json",
+          "authorization": "Bearer " + JSON.parse(localStorage.getItem("authSogevet")!).token || ""
+        }
+      )
+    }
+    return this.http.get<User>(this.apiUrl + id, options);
   }
 
   getOrdersOfUserId(id: number) {
-    return this.http.get<Order[]>(this.apiUrl + id + "/orders", this.options);
+    const options = {
+      headers: new HttpHeaders(
+        {
+          "content-type": "application/json",
+          "authorization": "Bearer " + JSON.parse(localStorage.getItem("authSogevet")!).token || ""
+        }
+      )
+    }
+    return this.http.get<Order[]>(this.apiUrl + id + "/orders", options);
   }
+
 
 }

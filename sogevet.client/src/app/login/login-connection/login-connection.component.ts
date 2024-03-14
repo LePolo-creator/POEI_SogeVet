@@ -12,7 +12,6 @@ export class LoginConnectionComponent {
   constructor(private loginService: LoginService) { }
 
   login(username: string, password: string) {
-    console.log("login comp"+username+password)
     this.loginService.login(username, password);
   }
 

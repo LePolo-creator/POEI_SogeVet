@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IndexComponent } from './index/index.component';
 import { CartComponent } from './cart/cart.component';
+import { authGuard } from './shared/auth.guard';
 
 
 
@@ -33,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: "account",
-    loadChildren: () => import("./user/user.module").then(m => m.UserModule)
+    loadChildren: () => import("./user/user.module").then(m => m.UserModule), canActivate: [authGuard]
   }
 
 ];

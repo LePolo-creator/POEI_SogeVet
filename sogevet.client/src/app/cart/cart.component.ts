@@ -10,14 +10,19 @@ import { CartService } from './service/cart.service';
 })
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = []
-  cart?: Cart
-
+  cart?: Cart 
   constructor(private cartService: CartService) { }
 
 
   ngOnInit() {
-/*    this.cartService.testCart() // fake seeds
-*/    this.cartService.cartUpdated.subscribe(cart => { console.log(cart), this.cart = cart, this.cartItems = this.cart.cartItems })
+    this.cart = this.cartService.getCart()
+    this.cartItems = this.cartService.getCartItems()
+    
+
+    this.cartService.cartUpdated.subscribe(cart => {
+      this.cart = cart
+      this.cartItems = this.cart.cartItems
+    })
 
 
    // this.cartItems = this.cartService.getCartItems()

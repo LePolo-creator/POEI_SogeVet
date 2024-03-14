@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.IdentityModel.Tokens;
 using SogeVet.Server.Data;
 using SogeVet.Server.Entities;
@@ -62,6 +63,7 @@ namespace BookAPI.Controllers
 
 
             var claimsForToken = new List<Claim>();
+            
             claimsForToken.Add(new Claim("sub", user.Id.ToString()));
             claimsForToken.Add(new Claim("firstname", user.FirstName));
             claimsForToken.Add(new Claim("lastname", user.LastName));
@@ -78,7 +80,7 @@ namespace BookAPI.Controllers
             var tokenToReturn = new JwtSecurityTokenHandler()
                .WriteToken(jwtSecurityToken);
 
-            return Ok(new { token = tokenToReturn });
+            return Ok(new { token = tokenToReturn, idUser = user.Id.ToString() });
         }
 
         private User ValidateUserCredentials(string? mail, string? password)

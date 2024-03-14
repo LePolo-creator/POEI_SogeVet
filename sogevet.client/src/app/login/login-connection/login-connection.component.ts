@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../service/login.service';
 
 @Component({
   selector: 'app-login-connection',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-connection.component.css']
 })
 export class LoginConnectionComponent {
+
+
+  constructor(private loginService: LoginService) { }
+
+  login(username: string, password: string) {
+    console.log("login comp"+username+password)
+    this.loginService.login(username, password);
+  }
 
 }

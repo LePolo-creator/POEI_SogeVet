@@ -51,6 +51,21 @@ namespace SogeVet.Server.Controllers
             return userDto;
         }
 
+        //GEt Ordres of user ID
+        [HttpGet("{id}/orders")]
+        public ActionResult<IEnumerable<OrderDto>> GetUserOrders(int id)
+        {
+            var orders = _context.Orders.Where(o => o.UserId==id);
+            List<OrderDto> orderstoReturn = new List<OrderDto>();
+
+            foreach (var item in orders)
+            {
+                orderstoReturn.Add(item.ConvertToDto());
+            }
+
+            return orderstoReturn;
+        }
+
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public ActionResult<UserDto> PutUser(int id, UserDto userDto)

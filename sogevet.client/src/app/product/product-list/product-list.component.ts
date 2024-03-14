@@ -19,9 +19,15 @@ export class ProductListComponent implements OnInit {
   filteredProducts?: Product[];
   categoryName?: string;
   filter: string = "";
+
+  currentPage = 1;
+  itemsPerPage = 8;
+
+
   constructor(private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-  private router:Router) { }
+    private router: Router) {
+  }
 
   filterProducts(keyword?: string, min?: number, max?: number) {
     this.filteredProducts = this.productsToDisplay
@@ -37,8 +43,48 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
 
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  // Ajouter une méthode pour vérifier si la page est la première
+  isFirstPage(): boolean {
+    return this.currentPage === 1;
+  }
+
+  // Ajouter une méthode pour vérifier si la page est la dernière
+  isLastPage(): boolean {
+    return this.currentPage === this.totalPages;
+  }
+
+  get totalPages(): number {
+    this.filteredProducts = this.productsToDisplay
+    return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+  }
+
+  get itemsForCurrentPage(): any[] {
+    this.filteredProducts = this.productsToDisplay
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredProducts.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  setPage(page: number): void {
+    this.currentPage = page;
+  }
+
+
+
+  ngOnInit(): void {
     this.activatedRoute.params.subscribe(
       parametres => {
         if (parametres['categoryName'] != "") {
@@ -80,6 +126,7 @@ export class ProductListComponent implements OnInit {
         this.products = p
         this.productsToDisplay = p;
         this.filteredProducts = p;
+        
       }
     );
   }

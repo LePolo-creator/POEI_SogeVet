@@ -10,16 +10,26 @@ import { Product } from './model/product';
 export class ProductService {
   private apiUrl = 'https://localhost:7265/api/products/';
   products: Product[] = []
+  colors: string[] = []
+  sizes: number[] = []
+
   productsUpdated = new Subject<Product[]>()
   options = {
     headers: new HttpHeaders({ "content-type": "application/json" })
   }
   constructor(private http: HttpClient) { }
 
+  getColors() {
+    console.log(this.colors)
+
+  }
+
   
   getProducts() {
     this.http.get<Product[]>(this.apiUrl).subscribe(products => {
       this.products = products
+      this.colors = [...new Set(this.products.map(p => p.color))]
+      this.sizes = [...new Set(this.products.map(p => p.size))] 
       this.productsUpdated.next([...this.products])
     })
   }

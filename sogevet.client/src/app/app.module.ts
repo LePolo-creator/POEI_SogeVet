@@ -9,6 +9,9 @@ import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DetailUserComponent } from './user/detail-user/detail-user.component';
 import { CommandUserComponent } from './user/command-user/command-user.component';
+import { FormsModule } from '@angular/forms';
+import { MenuComponent } from './menu/menu.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -21,9 +24,11 @@ import { CommandUserComponent } from './user/command-user/command-user.component
     AdminComponent,
     DetailUserComponent,
     CommandUserComponent,
+    MenuComponent,
+    FooterComponent,
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule
+    BrowserModule, HttpClientModule, AppRoutingModule,FormsModule
     
   ],
   providers: [],

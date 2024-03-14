@@ -43,7 +43,7 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-
+/*mettre un subscribe sur les total page etc si on lance un filter des produits*/
 
   nextPage(): void {
     if (this.currentPage < this.totalPages) {

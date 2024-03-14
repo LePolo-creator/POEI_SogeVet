@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../service/login.service';
 
 @Component({
   selector: 'app-login-register',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-register.component.css']
 })
 export class LoginRegisterComponent {
+  constructor(private loginService:LoginService) {
+
+  }
+
+  register(firstname: string, lastname: string, email: string, password: string, address: string) {
+    this.loginService.register(firstname, lastname, email, password, address);
+  }
 
 }

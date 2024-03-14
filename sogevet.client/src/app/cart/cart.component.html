@@ -15,7 +15,9 @@
                     </ng-template>
                   </div>
 
+
                   <div *ngFor="let item of cartItems">
+                  <div *ngIf="item.product" >
                    
                     <div class="row mb-4 d-flex justify-content-between align-items-center">
                       <div class="col-md-2 col-lg-2 col-xl-2">
@@ -42,6 +44,7 @@
                 </div>
               </div>
 
+              </div>
 
               <div  class="col-lg-4 bg-grey">
                 <div class="p-5" >
@@ -49,8 +52,8 @@
                   <hr class="my-4">
 
                   <div *ngIf="cart && cart.cartItems">
-                    <div class="d-flex justify-content-between mb-4"  *ngFor="let item of cartItems!">
-                      <p class="text-uppercase">{{item.product.name}}</p>
+                    <div class="d-flex justify-content-between mb-4"  *ngFor="let item of cart.cartItems!">
+                      <p class="text-uppercase" *ngIf="item.product">{{item.product.name}}</p>
                       <p class="text-uppercase">{{item.quantity}}</p>
                       <p class="text-uppercase">{{item.totalPrice}}</p>
                     </div>

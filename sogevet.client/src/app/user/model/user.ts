@@ -25,12 +25,6 @@ export class User {
   public set email(value: string) {
     this._email = value;
   }
-  public get password(): string {
-    return this._password;
-  }
-  public set password(value: string) {
-    this._password = value;
-  }
   public get address(): string {
     return this._address;
   }
@@ -51,7 +45,6 @@ export class User {
     private _firstName: string,
     private _lastName: string,
     private _email: string,
-    private _password: string,
     private _address: string,
     private _orders: Array<Order>
 

@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService{
   private apiUrl = 'https://localhost:7265/api/users/';
   user?: User;
   orders: Order[] = [];
@@ -23,13 +23,16 @@ export class UserService {
 
 
   constructor(private http: HttpClient) { }
+    
 
   getUserbyId(id: number): Observable<User> {
+    /*console.log(this.options)*/
     return this.http.get<User>(this.apiUrl + id, this.options);
   }
 
   getOrdersOfUserId(id: number) {
     return this.http.get<Order[]>(this.apiUrl + id + "/orders", this.options);
   }
+
 
 }

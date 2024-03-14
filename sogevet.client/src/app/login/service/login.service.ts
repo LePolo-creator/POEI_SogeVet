@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class LoginService {
   baseUrl = "https://localhost:7265/api/login";
   
 
-  constructor(private http: HttpClient, private router: Router
+  constructor(private http: HttpClient, private router: Router, userService : UserService
   ) { }
 
   login(username: string, password: string) {
@@ -27,14 +28,13 @@ export class LoginService {
     }
 
 
-    console.log(body);
+    //console.log(body);
     this.http.post(this.baseUrl, body, options).subscribe(
       {
         next: (response: any) => {
-          //console.log(response);
+          
           //Récupérer le token renvoyé par l'API serveur
           const authToken = (<any>response);
-
           //Enregistrer le token dans localstorage
           localStorage.setItem("authSogevet", JSON.stringify(authToken));
 
@@ -42,7 +42,9 @@ export class LoginService {
           this.router.navigate(["/"]);
         },
         error: error => console.log(error),
-        complete: () => console.log("Complete")
+        complete: () => {
+          console.log("Complete");
+        }
       }
     )
   }
@@ -53,8 +55,8 @@ export class LoginService {
       console.log("dans null")
       return false;
     }
+    console.log("hors null")
     var tokenAuth = JSON.parse(localStorage.getItem("authSogevet")!).token
-    console.log(tokenAuth);
     if (tokenAuth == undefined
     )
       return false;

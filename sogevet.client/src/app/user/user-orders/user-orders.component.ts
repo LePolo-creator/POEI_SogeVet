@@ -22,17 +22,6 @@ export class UserOrdersComponent implements OnInit{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(

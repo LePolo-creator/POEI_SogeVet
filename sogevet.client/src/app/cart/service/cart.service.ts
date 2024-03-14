@@ -5,6 +5,7 @@ import { ProductService } from '../../product/product.service';
 import { Subject } from 'rxjs';
 import { ICartItem } from '../model/i-cart-item';
 import { Product } from '../../product/model/product';
+import { OrderService } from '../../user/service/order.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,11 @@ export class CartService implements OnInit  {
   cartUpdated = new Subject<Cart>
 
 
-  constructor(private productService: ProductService){ }
+  constructor(private productService: ProductService, private orderService : OrderService){ }
+
+  submitOrder() {
+    this.orderService.newOrder(this.getCart())
+  }
 
  
   changeQuantity(productId: number, newQty: number) {

@@ -16,7 +16,7 @@ export class AppComponent {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         /*this.showMenuFooter = event.url !== "/login";*/
-        this.showMenuFooter != event.url.startsWith("/login");
+        this.showMenuFooter = !event.url.startsWith("/login");
       }
     });
   }

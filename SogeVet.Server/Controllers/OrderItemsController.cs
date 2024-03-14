@@ -69,8 +69,10 @@ namespace SogeVet.Server.Controllers
         {
             var orderItem = orderItemDto.ConvertToOrderItem();
             _context.OrderItems.Add(orderItem);
-            _context.SaveChanges();
+            var productToUpdate = _context.Products.FirstOrDefault(p => p.Id == orderItem.ProductId);
+            productToUpdate.Quantity -= orderItem.Quantity;
 
+            _context.SaveChanges();
             orderItemDto.Id = orderItem.Id;
 
             return orderItemDto;

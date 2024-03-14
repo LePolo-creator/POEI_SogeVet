@@ -53,7 +53,10 @@ export class OrderService {
                 totalPrice: item.totalPrice
               }),
               this.options
-            ).subscribe(i => console.log(i))
+            ).subscribe(() => {
+              localStorage.removeItem("cart")
+            }
+            )
           })
         })
     })

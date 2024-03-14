@@ -20,7 +20,27 @@ export class CartService implements OnInit  {
   constructor(private productService: ProductService){ }
 
  
+  changeQuantity(productId: number, newQty: number) {
+    if (newQty === 0) {
+      if (confirm("Etes-vous sûr de supprimer du panier?")) {
+        this.cartItems = this.cartItems.filter(item => item.productId !== productId)
+      }
+    }
+    else {
+      this.cartItems.map(item => {
+        if (item.productId === productId) {
+          item.quantity = newQty
+          item.totalPrice = newQty * item.unitPrice
+        }
+      })
+    }
 
+    this.cart = new Cart(this.cartItems, this.calculateTotal())
+    console.log(this.cartItems)
+    this.cartUpdated.next(this.cart)
+
+    localStorage.setItem("cart", JSON.stringify(this.cart))
+  }
 
   getItemsFromStorage() {
     let icartItemsFromStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")!)._cartItems as ICartItem[] : []
@@ -37,9 +57,16 @@ export class CartService implements OnInit  {
   }
 
 
-
+  alreadyInCart(productId : number): Boolean {
+    this.cartItems = this.getCartItems()
+    const inCart = this.cartItems.filter(item => item.productId === productId).length
+    return inCart? true : false
+  }
 
   addToCart(productId: number, qty: number) {
+    // vérifie si on l'a déjà dans le panier
+
+    
 
     this.productService.getProductById(productId).subscribe(p => {
 

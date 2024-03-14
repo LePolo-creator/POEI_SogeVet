@@ -3,6 +3,15 @@
     height: 100vh !important;
   }
 }
+.img-fluid {
+  height: 100px;
+  object-fit: cover;
+}
+
+.icon {
+    height:10px;
+    width: 10px;
+}
 
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
   font-size: 1rem;

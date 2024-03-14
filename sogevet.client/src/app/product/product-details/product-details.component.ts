@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../model/product';
 import { NgForm } from '@angular/forms';
@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   product?: Product;
   stockLevel?: string;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: CartService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -41,7 +41,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(productId: number, qty: number): void {
-    this.cartService.addToCart(productId, qty)
+    this.cartService.alreadyInCart(productId) ? this.cartService.changeQuantity(productId, qty) : this.cartService.addToCart(productId, qty)
+    this.router.navigate(["/products"])
   }
 }
 

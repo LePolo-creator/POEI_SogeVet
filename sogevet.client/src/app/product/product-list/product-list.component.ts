@@ -23,7 +23,19 @@ export class ProductListComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
   private router:Router) { }
 
-
+  filterProducts(keyword?: string, min?: number, max?: number) {
+    this.filteredProducts = this.productsToDisplay
+    if (keyword) {
+      this.filteredProducts = this.filteredProducts.filter(p => 
+        p.name.toLowerCase().includes(keyword.toLowerCase()) || p.description.toLowerCase().includes(keyword.toLowerCase())
+      )}
+    if (max) {
+      this.filteredProducts = this.filteredProducts.filter(p => p.unitPrice <= +max);
+    }
+    if (min) {
+      this.filteredProducts = this.filteredProducts.filter(p => p.unitPrice >= +min);
+    }
+  }
 
   ngOnInit(): void {
 

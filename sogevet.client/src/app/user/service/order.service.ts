@@ -13,11 +13,22 @@ import { Subject } from 'rxjs';
 export class OrderService {
   // IL FAUT UserId
   ordersUpdated = Subject<Order>
+  cart? : Cart
 
   baseUrl = "https://localhost:7265/api/";
 
-  
-  constructor(private http : HttpClient, private userService : UserService) { }
+
+  options = {
+    headers: new HttpHeaders(
+      {
+        "content-type": "application/json",
+        "authorization": "Bearer " + JSON.parse(localStorage.getItem("authSogevet")!).token || ""
+      }
+    )
+  }
+  constructor(private http: HttpClient, private userService: UserService) { }
+
+
 
   newOrder(cart: Cart) {
     const cartItems = cart.cartItems
@@ -50,8 +61,12 @@ export class OrderService {
                 productName: item.product.name,
                 totalPrice: item.totalPrice
               }),
-              options
-            ).subscribe(i => console.log(i))
+              this.options
+            ).subscribe(() => {
+              localStorage.removeItem("cart")
+            }
+            )
+
           })
         })
     })

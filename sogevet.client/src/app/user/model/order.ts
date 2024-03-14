@@ -33,7 +33,7 @@ export class Order {
   }
   constructor(
     private _id: number,
-    private _status: string,
+    private _status: string = "En attente de traitement",
     private _address: string,
     private _userId: number,
     private _orderItems: Array<OrderItems>

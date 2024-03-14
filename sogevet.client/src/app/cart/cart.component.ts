@@ -13,7 +13,10 @@ export class CartComponent implements OnInit {
   cart?: Cart 
   constructor(private cartService: CartService) { }
 
-
+  submitOrder() {
+    this.cartService.submitOrder();
+    // router
+  }
 
   changeQtyInCart(productId: number, newQty: number) {
     this.cartService.changeQuantity(productId,newQty)

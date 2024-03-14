@@ -70,7 +70,7 @@
                       <h5>{{cart!.totalPrice.toFixed(2)}} €</h5>
                     </div>
 
-                    <button type="button" class="btn btn-dark btn-block btn-lg"
+                    <button *ngIf="cart" type="button" (click)="submitOrder()" class="btn btn-dark btn-block btn-lg"
                             data-mdb-ripple-color="dark">
                       Commander
                     </button>

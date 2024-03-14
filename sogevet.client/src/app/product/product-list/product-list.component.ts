@@ -3,7 +3,7 @@ import { ProductService } from '../product.service';
 import { Product } from '../model/product';
 import { Subscription } from 'rxjs';
 
-@Component({
+@Component({<
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']

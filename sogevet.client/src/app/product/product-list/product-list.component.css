@@ -1,0 +1,8 @@
+.page-link {
+  cursor: pointer;
+}
+
+.disabled > .page-link {
+  color: #ccc;
+  cursor: not-allowed;
+}

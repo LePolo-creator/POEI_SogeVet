@@ -13,8 +13,9 @@ using SogeVet.Server.Models;
 
 namespace SogeVet.Server.Controllers
 {
-    [Route("api/[controller]")]
     [Authorize]
+    [Route("api/[controller]")]
+    
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -86,6 +87,8 @@ namespace SogeVet.Server.Controllers
         }
 
         // POST: api/Users
+
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult<UserDto> PostUser(UserDto userDto)
         {

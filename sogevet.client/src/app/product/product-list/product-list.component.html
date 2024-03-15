@@ -10,33 +10,48 @@
           <h2>{{categoryName?categoryName:''}}</h2>
         </div>
 
-            <form class="my-5">
-              <h4>Filtres</h4>
-              <div class="d-flex justify-content-center gap-3 mb-3 align-items-end p-3">
+        <form class="my-5">
+          <h4>Filtres</h4>
+          <div class="d-flex justify-content-center gap-3 mb-3 align-items-end p-3">
 
-                <div>
-                  <label for="keyword">Mot clé</label>
-                  <input type="text" class="form-control" id="keyword" name="keyword" #keyword placeholder="Mot clé" />
-                </div>
+            <div>
+              <label for="keyword">Mot clé</label>
+              <input type="text" class="form-control" id="keyword" name="keyword" #keyword placeholder="Mot clé" />
+            </div>
 
-<!--                <div>
-                  <label for="color">Couleur</label>
-                  <input type="checkbox" id="color" name="color" value="bleu" />
-                </div>-->
+            <!--                <div>
+                    <label for="color">Couleur</label>
+                    <input type="checkbox" id="color" name="color" value="bleu" />
+                  </div>-->
 
-                <div>
-                  <label for=""> Fourchette de prix</label>
-                  <div class="d-flex gap-1">
-                    <input type="number" class="form-control" #min placeholder="Min" />
-                    <input type="number" class="form-control" #max placeholder="Max" />
-                  </div>
-                </div>
-                <div>
-                  <button type="button" class="btn btn-primary" (click)="filterProducts(keyword.value,+min.value, +max.value)">Rechercher </button>
-                </div>
+            <div>
+              <label for=""> Fourchette de prix</label>
+              <div class="d-flex gap-1">
+                <input type="number" class="form-control" #min placeholder="Min" />
+                <input type="number" class="form-control" #max placeholder="Max" />
               </div>
+            </div>
+            <div>
+              <button type="button" class="btn btn-primary" (click)="filterProducts(keyword.value,+min.value, +max.value)">Rechercher </button>
+            </div>
+          </div>
 
-            </form>
+        </form>
+
+
+        <nav aria-label="Page navigation" >
+          <ul class="pagination">
+            <li class="page-item" [class.disabled]="isFirstPage()" (click)="prevPage()">
+              <a class="page-link" >Précédent</a>
+            </li>
+            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" (click)="setPage(i + 1)">
+              <a class="page-link">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="isLastPage()" (click)="nextPage()">
+              <a class="page-link" >Suivant</a>
+            </li>
+          </ul>
+        </nav>
 
 
 
@@ -44,7 +59,7 @@
 
         <div class="row item-wrapper1 row card-group">
           <!---->
-          <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 toggle-item-active1" *ngFor="let p of filteredProducts?filteredProducts:productsToDisplay">
+          <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6 toggle-item-active1" *ngFor="let p of itemsForCurrentPage">
             <app-product-card [product]="p"></app-product-card>
           </div>
 

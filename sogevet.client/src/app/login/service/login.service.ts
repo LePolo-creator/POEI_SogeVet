@@ -50,12 +50,57 @@ export class LoginService {
   }
 
 
+  register(firstname:string,lastname:string,email:string,password:string,address:string) {
+    const body = JSON.stringify({
+      FirstName: firstname,
+      LastName: lastname,
+      Email: email,
+      Password: password,
+      Address: address,
+      IsAdmin: false,
+      IsActive:true
+    })
+    console.log("body de register :" + body)
+
+
+    const options = {
+      headers: new HttpHeaders(
+        {
+          "content-type": "application/json"
+        }
+      )
+    }
+
+    this.http.post("https://localhost:7265/api/users", body, options).subscribe(
+      {
+        next: (response: any) => {
+
+          //Récupérer le token renvoyé par l'API serveur
+          //const authToken = (<any>response);
+          //Enregistrer le token dans localstorage
+          //localStorage.setItem("authSogevet", JSON.stringify(authToken));
+
+          //une fois que l'utilisateur est connecté, je le redirige vers la liste des produits
+          this.router.navigate(["/"]);
+        },
+        error: error => console.log(error),
+        complete: () => {
+          console.log("Complete");
+        }
+      }
+    )
+
+  }
+
+  logout() {
+    localStorage.removeItem("authSogevet");
+    this.router.navigate(["/"]);
+  }
+
   isAuthenticated(): boolean {
     if (localStorage.getItem("authSogevet") == null) {
-      console.log("dans null")
       return false;
     }
-    console.log("hors null")
     var tokenAuth = JSON.parse(localStorage.getItem("authSogevet")!).token
     if (tokenAuth == undefined
     )

@@ -21,7 +21,7 @@ export class NewOrderComponent implements OnInit {
   
   newOrder() {
     this.orderService.newOrder(this.cart!)
-    this.router.navigate(["/account"])
+    this.router.navigate(["/"])
   }
 
   ngOnInit() {

@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   productsToDisplay: Product[] = [];
   productSubscription?: Subscription;
-  filteredProducts?: Product[];
+  filteredProducts: Product[] = this.productsToDisplay;
   categoryName?: string;
   filter: string = "";
   colors: string[] = []
@@ -59,6 +59,8 @@ export class ProductListComponent implements OnInit {
     if (selectedSizes.length > 0) {
       this.filteredProducts = this.filteredProducts.filter(p => selectedSizes.includes(p.size));
     }
+
+    console.log(this.filteredProducts)
   }
 
 
@@ -89,14 +91,14 @@ export class ProductListComponent implements OnInit {
   }
 
   get totalPages(): number {
-    this.filteredProducts = this.productsToDisplay
-    return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+    //this.filteredProducts = this.productsToDisplay
+    return Math.ceil(this.productsToDisplay.length / this.itemsPerPage);
   }
 
   get itemsForCurrentPage(): any[] {
-    this.filteredProducts = this.productsToDisplay
+    //this.filteredProducts = this.productsToDisplay
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.filteredProducts.slice(startIndex, startIndex + this.itemsPerPage);
+    return this.filteredProducts!.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
   setPage(page: number): void {

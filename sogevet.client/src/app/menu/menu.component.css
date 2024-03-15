@@ -1,0 +1,8 @@
+.active {
+    color: black;
+    font-weight: bolder;
+}
+
+.category, .category:hover {
+    text-decoration: none;
+}

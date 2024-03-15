@@ -21,28 +21,25 @@
           </div>
         </div>
         <div class="col-lg-5 col-md-4 col-12">
-          <div class="header-right-wrap">
+          <div class="header-right-wrap align-items-center">
 
-            <div class="same-style account-setting">
-              <a class="account-setting-active"><i class="pe-7s-user-female"></i></a>
-              <div>
-                <!-- un ng if pour les liens-->
+            <div class="same-style account-setting text-end">
+              <a class="account-setting-active" (click)="toggleList()"><i class="pe-7s-user-female"></i></a>
+              <div *ngIf="showList" >
                 <ul>
-                  <li><a routerLink="/login" class="text-black-50 text-decoration-none">Se connecter</a></li>
-                  <li><a routerLink="/login/register" class="text-black-50 text-decoration-none">Créer un compte</a></li>
-                  <li><a routerLink="/account" class="text-black-50 text-decoration-none">Mon compte</a></li>
-                  <li><a routerLink="/account/orders" class="text-black-50 text-decoration-none">Mes commandes</a></li>
+                  <li><a *ngIf="!isLogged()" routerLink="/login" class="text-black-50 text-decoration-none">Se connecter</a></li>
+                  <li><a *ngIf="!isLogged()" routerLink="/login/register" class="text-black-50 text-decoration-none">Créer un compte</a></li>
+                  <li><a *ngIf="isLogged()" routerLink="/account" class="text-black-50 text-decoration-none">Mon compte</a></li>
+                  <li><a *ngIf="isLogged()" routerLink="/account/orders" class="text-black-50 text-decoration-none">Mes commandes</a></li>
+                  <li><a *ngIf="isLogged()" (click)="logout()" class="text-black-50 text-decoration-none">Se déconnecter</a></li>
+
                 </ul>
               </div>
             </div>
-            <div class="same-style cart-wrap">
-              <button class="icon-cart"  routerLink="/cart">
-                <i class="pe-7s-shopbag"></i>
-              </button>
-            </div>
-            <div class="same-style cart-wrap"><!--LOGOUT-->
-              <button (click)="logout()">
-                <i class="pe-7s-shopbag"></i>
+            <div class="same-style cart-wrap text-end">
+              <button class="icon-cart d-flex"  routerLink="/cart">
+                <i class="pe-7s-shopbag"> </i>
+                <p>({{nbItems}})</p>  <!-- Marche bien à l'update du cart mais pas si on actualise -->
               </button>
             </div>
           </div>

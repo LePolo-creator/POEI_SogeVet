@@ -62,7 +62,6 @@ export class ProductListComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
 
   /*mettre un subscribe sur les total page etc si on lance un filter des produits*/
 

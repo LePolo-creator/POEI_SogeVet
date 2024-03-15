@@ -1,3 +1,6 @@
+.filter-checkboxes{
+    flex-wrap: wrap;
+
 .page-link {
   cursor: pointer;
 }

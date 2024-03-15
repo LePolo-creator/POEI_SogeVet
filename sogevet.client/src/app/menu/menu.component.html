@@ -1,6 +1,6 @@
 
 
-<header class="header-area clearfix header-hm9 transparent-bar">
+<header class="header-area ">
   <div class="container">
     <div class="header-top-area header-top-border17">
       <div class="row">
@@ -22,36 +22,22 @@
         </div>
         <div class="col-lg-5 col-md-4 col-12">
           <div class="header-right-wrap">
-            <div class="same-style header-search">
-              <a class="search-active" href="#"><i class="pe-7s-search"></i></a>
-              <div class="search-content">
-                <form action="#">
-                  <input type="text" placeholder="Search" />
-                  <button class="button-search"><i class="pe-7s-search"></i></button>
-                </form>
-              </div>
-            </div>
-            <div class="same-style account-satting">
-              <a class="account-satting-active"><i class="pe-7s-user-female"></i></a>
+
+            <div class="same-style account-setting">
+              <a class="account-setting-active"><i class="pe-7s-user-female"></i></a>
               <div>
-                <!---->
+                <!-- un ng if pour les liens-->
                 <ul>
-                  <li><a routerLink="/login">Login</a></li>
-                  <li><a routerLink="/login/register">Register</a></li>
-                  <li><a routerLink="/account">my account</a></li>
+                  <li><a routerLink="/login" class="text-black-50 text-decoration-none"  >Se connecter</a></li>
+                  <li><a routerLink="/login/register" class="text-black-50 text-decoration-none">Créer un compte</a></li>
+                  <li><a routerLink="/account" class="text-black-50 text-decoration-none">Mon compte</a></li>
                 </ul>
               </div>
             </div>
             <div class="same-style cart-wrap">
-              <button class="icon-cart">
+              <button class="icon-cart"  routerLink="/cart">
                 <i class="pe-7s-shopbag"></i>
               </button>
-              <div class="shopping-cart-content">
-                <div class="shopping-cart-btn btn-hover text-center">
-                  <a class="default-btn" routerLink="/cart">view cart</a>
-                  <a class="default-btn" href="checkout.html">checkout</a>
-                </div>
-              </div>
             </div>
             <div class="same-style cart-wrap"><!--LOGOUT-->
               <button (click)="logout()">
@@ -63,32 +49,26 @@
       </div>
     </div>
   </div>
+
   <div class="header-bottom sticky-bar header-res-padding header-padding-2">
     <div class="container">
       <div class="row">
         <div class="col-12 d-block d-lg-none">
-          <div class="logo">
-            <a href="index.html">
-              <img alt="" src="assets/img/logo/logo.webp">
-            </a>
-          </div>
         </div>
+
         <div class="col-xl-12 col-lg-12 d-none d-lg-block">
           <div class="main-menu">
             <nav>
               <ul>
                 <li>
-                  <a routerLink="/">Home <i class=""></i></a>
+                  <a routerLink="/products"> Tout voir <i class=""></i> </a>
+                </li>
+                <li><a routerLink="/products/filter/men">Hommes</a></li>
+                <li>
+                  <a routerLink="/products/filter/women">Femmes<i class=""></i></a>
                 </li>
                 <li>
-                  <a routerLink="/products"> All Product <i class=""></i> </a>
-                </li>
-                <li><a routerLink="/products/filter/men">Man</a></li>
-                <li>
-                  <a routerLink="/products/filter/women">Woman<i class=""></i></a>
-                </li>
-                <li>
-                  <a routerLink="/products/filter/child">Child <i class=""></i></a>
+                  <a routerLink="/products/filter/child">Enfants <i class=""></i></a>
                 </li>
               </ul>
             </nav>
@@ -98,6 +78,7 @@
     </div>
   </div>
 </header>
+<!--
 <div class="slider-banner-area">
   <div class="container">
     <div class="row flex-row-reverse">
@@ -114,3 +95,4 @@
     </div>
   </div>
 </div>
+-->

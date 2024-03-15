@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
 
+  selectedColors: { [key: string]: boolean } = {};
+  selectedSizes: { [key: string]: boolean } = {};
 
 
   products: Product[] = [];
@@ -19,18 +21,22 @@ export class ProductListComponent implements OnInit {
   filteredProducts?: Product[];
   categoryName?: string;
   filter: string = "";
-
+  colors: string[] = []
+  sizes: number[] = []
   currentPage = 1;
   itemsPerPage = 8;
 
 
+
   constructor(private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) {
-  }
+    private router: Router) {}
+
 
   filterProducts(keyword?: string, min?: number, max?: number) {
     this.filteredProducts = this.productsToDisplay
+    //console.log('Selected Colors:', this.selectedColors);
+    //console.log('Selected Sizes:', this.selectedSizes);
     if (keyword) {
       this.filteredProducts = this.filteredProducts.filter(p => 
         p.name.toLowerCase().includes(keyword.toLowerCase()) || p.description.toLowerCase().includes(keyword.toLowerCase())
@@ -41,9 +47,24 @@ export class ProductListComponent implements OnInit {
     if (min) {
       this.filteredProducts = this.filteredProducts.filter(p => p.unitPrice >= +min);
     }
+
+    // filtre couleur
+    const selectedColorKeys = Object.keys(this.selectedColors).filter(key => this.selectedColors[key]);
+    if (selectedColorKeys.length > 0) {
+      this.filteredProducts = this.filteredProducts.filter(p => selectedColorKeys.includes(p.color));
+    }
+
+    // Filtre taille
+    const selectedSizes = Object.keys(this.selectedSizes).filter(key => this.selectedSizes[key]).map(Number);
+    if (selectedSizes.length > 0) {
+      this.filteredProducts = this.filteredProducts.filter(p => selectedSizes.includes(p.size));
+    }
   }
 
-/*mettre un subscribe sur les total page etc si on lance un filter des produits*/
+
+  ngOnInit(): void {
+
+  /*mettre un subscribe sur les total page etc si on lance un filter des produits*/
 
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
@@ -56,6 +77,7 @@ export class ProductListComponent implements OnInit {
       this.currentPage--;
     }
   }
+
 
   // Ajouter une méthode pour vérifier si la page est la première
   isFirstPage(): boolean {
@@ -109,6 +131,7 @@ export class ProductListComponent implements OnInit {
         }
         if (this.filter == "") {
           this.productService.getProducts();
+
         } else {
           this.productService.getProductsFilter(this.filter);
         }
@@ -124,6 +147,9 @@ export class ProductListComponent implements OnInit {
       p => {
         
         this.products = p
+        this.colors = this.productService.colors
+        this.sizes = this.productService.sizes
+
         this.productsToDisplay = p;
         this.filteredProducts = p;
         

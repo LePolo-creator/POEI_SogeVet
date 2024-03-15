@@ -56,7 +56,7 @@ namespace SogeVet.Server.Controllers
         [HttpGet("{id}/orders")]
         public ActionResult<IEnumerable<OrderDto>> GetUserOrders(int id)
         {
-            var orders = _context.Orders.Where(o => o.UserId==id);
+            var orders = _context.Orders.Where(o => o.UserId==id).Include(o=>o.OrderItems);
             List<OrderDto> orderstoReturn = new List<OrderDto>();
 
             foreach (var item in orders)

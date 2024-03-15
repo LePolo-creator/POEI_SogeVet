@@ -30,7 +30,9 @@
                   <li><a *ngIf="!isLogged()" routerLink="/login" class="text-black-50 text-decoration-none">Se connecter</a></li>
                   <li><a *ngIf="!isLogged()" routerLink="/login/register" class="text-black-50 text-decoration-none">Créer un compte</a></li>
                   <li><a *ngIf="isLogged()" routerLink="/account" class="text-black-50 text-decoration-none">Mon compte</a></li>
+                  <li><a *ngIf="isLogged()" routerLink="/account/orders" class="text-black-50 text-decoration-none">Mes commandes</a></li>
                   <li><a *ngIf="isLogged()" (click)="logout()" class="text-black-50 text-decoration-none">Se déconnecter</a></li>
+
                 </ul>
               </div>
             </div>

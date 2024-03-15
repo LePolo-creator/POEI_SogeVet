@@ -26,7 +26,11 @@ export class NewOrderComponent implements OnInit {
 
   ngOnInit() {
     this.cart = this.cartService.getCart()
-    this.userService.getUserbyId(3).subscribe(u => this.user = u)
+    this.userService.getUserbyId(JSON.parse(localStorage.getItem("authSogevet")!).idUser).subscribe(u => {
+      this!.user = u;
+      console.log(this.user);
+    });
+    //this.userService.getUserbyId(3).subscribe(u => this.user = u)
     console.log(this.cart)
   }
   

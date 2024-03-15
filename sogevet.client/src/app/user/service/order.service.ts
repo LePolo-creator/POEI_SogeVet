@@ -19,14 +19,14 @@ export class OrderService {
   baseUrl = "https://localhost:7265/api/";
 
 
-  options = {
+ /* options = {
     headers: new HttpHeaders(
       {
         "content-type": "application/json",
         "authorization": "Bearer " + JSON.parse(localStorage.getItem("authSogevet")!).token || ""
       }
     )
-  }
+  } */
   constructor(private http: HttpClient, private userService: UserService) { }
 
 
@@ -62,7 +62,7 @@ export class OrderService {
                 productName: item.product.name,
                 totalPrice: item.totalPrice
               }),
-              this.options
+              options
             ).subscribe(() => {
               localStorage.removeItem("cart")
             }

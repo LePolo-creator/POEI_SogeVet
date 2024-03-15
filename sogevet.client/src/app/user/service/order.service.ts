@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Cart } from '../../cart/model/cart';
 import { OrderItems } from '../model/order-items';
 import { CartItem } from '../../cart/model/cart-item';
@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Order } from '../model/order';
 import { UserService } from '../user.service';
 import { Subject } from 'rxjs';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class OrderService {
         }
       )
     }
-    this.userService.getUserbyId(2).subscribe(user => {
+    this.userService.getUserbyId(JSON.parse(localStorage.getItem("authSogevet")!).idUser).subscribe(user => {
       this.http.post<Order>(
         this.baseUrl+"orders",
         JSON.stringify({
